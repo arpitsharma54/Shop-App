@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => Auth(),
         ),
+        // ignore: missing_required_param
         ChangeNotifierProxyProvider<Auth, Products>(
           update: (ctx, auth, previousProducts) => Products(
               auth.token,
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProvider(
         //   create: (ctx) => Orders(),
         // ),
+        // ignore: missing_required_param
         ChangeNotifierProxyProvider<Auth, Orders>(
           update: (ctx, auth, previousProducts) => Orders(
               auth.token,
@@ -48,12 +50,10 @@ class MyApp extends StatelessWidget {
         builder: (ctx, auth, _) => MaterialApp(
           title: 'MyShop',
           theme: ThemeData(
-            primarySwatch: Colors.purple,
-            accentColor: Colors.deepOrange,
             fontFamily: 'Lato',
             pageTransitionsTheme: PageTransitionsTheme(builders: {
               TargetPlatform.android: CustomPageTransitionBuilder(),
-            }),
+            }), colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple).copyWith(secondary: Colors.deepOrange),
           ),
           home: auth.isAuth
               ? ProductsOverviewScreen()
